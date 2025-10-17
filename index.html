@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de los Teleprocesos y Modelo OSI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #000;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 2.5cm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: white;
+            position: relative;
+        }
+        
+        .page {
+            margin-bottom: 2cm;
+            page-break-after: always;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 18pt;
+            text-align: center;
+            border-bottom: 2px solid black;
+            padding-bottom: 6px;
+            margin-bottom: 24px;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            border-bottom: 1px solid black;
+            padding-bottom: 4px;
+            margin-top: 32px;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 24px;
+        }
+        
+        h4 {
+            font-size: 11pt;
+            font-style: italic;
+            margin-top: 18px;
+        }
+        
+        p {
+            margin: 12px 0;
+            text-align: justify;
+            font-size: 11pt;
+        }
+        
+        ul, ol {
+            margin: 12px 0;
+            padding-left: 36px;
+        }
+        
+        li {
+            margin: 6px 0;
+            font-size: 11pt;
+        }
+        
+        .section {
+            margin-bottom: 24px;
+        }
+        
+        .subsection {
+            margin-left: 12px;
+            margin-bottom: 18px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 1cm;
+            left: 2.5cm;
+            right: 2.5cm;
+            text-align: center;
+            font-size: 10pt;
+            border-top: 1px solid black;
+            padding-top: 6px;
+        }
+        
+        /* Índice mejorado */
+        .index-container {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #000;
+            background-color: #f9f9f9;
+        }
+        
+        .index-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+        }
+        
+        .index-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .index-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .index-list {
+            list-style-type: none;
+        }
+        
+        .index-list li {
+            margin-bottom: 8px;
+            font-size: 10pt;
+        }
+        
+        .index-list a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+            padding: 2px 5px;
+            border-radius: 2px;
+            transition: background-color 0.2s;
+        }
+        
+        .index-list a:hover {
+            background-color: #e8e8e8;
+        }
+        
+        .level-1 {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .level-2 {
+            padding-left: 15px;
+        }
+        
+        .level-3 {
+            padding-left: 30px;
+            font-style: italic;
+        }
+        
+        @media print {
+            .container {
+                margin: 0;
+                box-shadow: none;
+            }
+            .index-container {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page">
+            <div class="header">
+                <P>Jesus Peña</P>
+                <P>31495853</P>
+                <h1>TELEPROCESOS</h1>
+                <h1>FUNDAMENTOS DE LOS TELEPROCESOS</h1>
+            </div>
+
+            <!-- Índice debajo del título principal -->
+            <div class="index-container">
+                <div class="index-title">ÍNDICE DEL DOCUMENTO</div>
+                <div class="index-columns">
+                    <div class="index-column">
+                        <ul class="index-list">
+                            <li class="level-1"><a href="#introduccion">INTRODUCCIÓN A LOS TELEPROCESOS</a></li>
+                            <li class="level-2"><a href="#definicion-historia">Definición y Contexto Histórico</a></li>
+                            <li class="level-2"><a href="#importancia-evolucion">Importancia en la Evolución Tecnológica</a></li>
+                            
+                            <li class="level-1"><a href="#componentes-hardware">COMPONENTES DE HARDWARE</a></li>
+                            <li class="level-2"><a href="#computador-central">Computador Central (Mainframe)</a></li>
+                            <li class="level-2"><a href="#front-end-processor">Front-End Processor</a></li>
+                            <li class="level-2"><a href="#terminales-remotas">Terminales Remotas</a></li>
+                            <li class="level-2"><a href="#modems-comunicacion">Módems y Equipos de Comunicación</a></li>
+                            
+                            <li class="level-1"><a href="#software-teleproceso">SOFTWARE DE SISTEMAS</a></li>
+                            <li class="level-2"><a href="#sistemas-operativos">Sistemas Operativos de Mainframe</a></li>
+                            <li class="level-2"><a href="#monitores-teleproceso">Monitores de Teleproceso</a></li>
+                        </ul>
+                    </div>
+                    <div class="index-column">
+                        <ul class="index-list">
+                            <li class="level-1"><a href="#arquitectura-comunicaciones">ARQUITECTURA DE COMUNICACIONES</a></li>
+                            <li class="level-2"><a href="#topologias-red">Topologías de Red</a></li>
+                            <li class="level-2"><a href="#medios-transmision">Medios de Transmisión</a></li>
+                            
+                            <li class="level-1"><a href="#protocolos-comunicacion">PROTOCOLOS DE COMUNICACIÓN</a></li>
+                            <li class="level-2"><a href="#protocolos-caracter">Protocolos Orientados a Carácter</a></li>
+                            <li class="level-2"><a href="#protocolos-bit">Protocolos Orientados a Bit</a></li>
+                            
+                            <li class="level-1"><a href="#modelo-osi">MODELO OSI APLICADO</a></li>
+                            <li class="level-2"><a href="#capa-fisica">Capa 1 - Física</a></li>
+                            <li class="level-2"><a href="#capa-enlace">Capa 2 - Enlace de Datos</a></li>
+                        </ul>
+                    </div>
+                    <div class="index-column">
+                        <ul class="index-list">
+                            <li class="level-2"><a href="#capa-red">Capa 3 - Red</a></li>
+                            <li class="level-2"><a href="#capa-transporte">Capa 4 - Transporte</a></li>
+                            <li class="level-2"><a href="#capa-sesion">Capa 5 - Sesión</a></li>
+                            <li class="level-2"><a href="#capa-presentacion">Capa 6 - Presentación</a></li>
+                            <li class="level-2"><a href="#capa-aplicacion">Capa 7 - Aplicación</a></li>
+                            
+                            <li class="level-1"><a href="#flujo-transaccion">FLUJO DE UNA TRANSACCIÓN</a></li>
+                            <li class="level-2"><a href="#inicio-sesion">Fase 1: Inicio de Sesión</a></li>
+                            <li class="level-2"><a href="#captura-transaccion">Fase 2: Captura de Transacción</a></li>
+                            
+                            <li class="level-1"><a href="#evolucion-legado">EVOLUCIÓN Y LEGADO</a></li>
+                            <li class="level-2"><a href="#transicion-arquitecturas">Transición a Arquitecturas Modernas</a></li>
+                            <li class="level-2"><a href="#lecciones-aprendidas">Lecciones Aprendidas</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="introduccion">
+                <h2>INTRODUCCIÓN COMPLETA A LOS TELEPROCESOS</h2>
+                
+                <div class="subsection" id="definicion-historia">
+                    <h3>Definición y Contexto Histórico</h3>
+                    <p>Los teleprocesos (teleprocesamiento) representan la evolución natural de los sistemas informáticos centralizados hacia la comunicación distribuida. Surgieron en las décadas de 1960-1970 como respuesta a la necesidad de conectar terminales remotas con computadores centrales (mainframes) para procesar transacciones en tiempo real.</p>
+                    
+                    <h4>Características Fundamentales:</h4>
+                    <ul>
+                        <li>Procesamiento Remoto: Capacidad de ejecutar operaciones en un computador central desde ubicaciones geográficamente dispersas</li>
+                        <li>Tiempo Real: Respuesta inmediata a las solicitudes (generalmente en segundos o menos)</li>
+                        <li>Interactividad: Diálogo continuo usuario-sistema</li>
+                        <li>Centralización: Un solo punto de procesamiento con múltiples puntos de entrada</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="importancia-evolucion">
+                    <h3>Importancia en la Evolución Tecnológica</h3>
+                    <p>Los teleprocesos marcaron el camino hacia:</p>
+                    <ul>
+                        <li>Sistemas transaccionales modernos</li>
+                        <li>Arquitectura cliente-servidor</li>
+                        <li>Computación en la nube</li>
+                        <li>Aplicaciones empresariales distribuidas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="componentes-hardware">
+                <h2>COMPONENTES DE HARDWARE DETALLADOS</h2>
+                
+                <div class="subsection" id="computador-central">
+                    <h3>1. Computador Central (Mainframe)</h3>
+                    <h4>Características técnicas:</h4>
+                    <ul>
+                        <li>Alta capacidad de procesamiento (para su época)</li>
+                        <li>Gran almacenamiento en discos y cintas</li>
+                        <li>Múltiples procesadores trabajando en paralelo</li>
+                        <li>Sistemas de respaldo y redundancia</li>
+                    </ul>
+                    <p>Ejemplos: IBM System/360, System/370</p>
+                    
+                    <h4>Funciones específicas:</h4>
+                    <ul>
+                        <li>Procesamiento de todas las transacciones</li>
+                        <li>Almacenamiento centralizado de bases de datos</li>
+                        <li>Gestión de recursos del sistema</li>
+                        <li>Ejecución de aplicaciones empresariales críticas</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="front-end-processor">
+                    <h3>2. Front-End Processor (FEP) - Procesador Frontal</h3>
+                    <h4>Propósito principal:</h4>
+                    <p>Descargar al computador central de las tareas de comunicación para que se dedique exclusivamente al procesamiento.</p>
+                    
+                    <h4>Funciones detalladas:</h4>
+                    <ul>
+                        <li>Gestión de Líneas: Control de múltiples conexiones simultáneas</li>
+                        <li>Control de Protocolos: Implementación de SDLC, BSC, etc.</li>
+                        <li>Detección/Corrección de Errores: Verificación de integridad de datos</li>
+                        <li>Multiplexación: Combinación de múltiples señales en un solo canal</li>
+                        <li>Buffering: Almacenamiento temporal de datos en tránsito</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="terminales-remotas">
+                    <h3>3. Terminales Remotas</h3>
+                    <h4>Tipos y características:</h4>
+                    <ul>
+                        <li>Terminales "Tontas":
+                            <ul>
+                                <li>Solo capacidad de entrada/salida básica</li>
+                                <li>Sin procesamiento local</li>
+                                <li>Ejemplos: IBM 3270, DEC VT100</li>
+                            </ul>
+                        </li>
+                        <li>Terminales Inteligentes:
+                            <ul>
+                                <li>Capacidad de procesamiento limitado</li>
+                                <li>Validación básica de datos</li>
+                                <li>Almacenamiento temporal</li>
+                            </ul>
+                        </li>
+                        <li>Dispositivos Especializados:
+                            <ul>
+                                <li>Cajeros automáticos</li>
+                                <li>Terminales punto de venta (TPV)</li>
+                                <li>Estaciones de trabajo industriales</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="modems-comunicacion">
+                    <h3>4. Módems y Equipos de Comunicación</h3>
+                    <h4>Tecnologías empleadas:</h4>
+                    <ul>
+                        <li>Módems Analógicos: Conversión digital-analógico para líneas telefónicas</li>
+                        <li>Módems de Banda Ancha: Para conexiones dedicadas de mayor velocidad</li>
+                        <li>Multiplexores: Combinación de múltiples canales</li>
+                        <li>Concentradores: Agregación de tráfico de múltiples terminales</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="page">
+            <div class="section" id="software-teleproceso">
+                <h2>SOFTWARE DE SISTEMAS DE TELEPROCESO</h2>
+                
+                <div class="subsection" id="sistemas-operativos">
+                    <h3>Sistemas Operativos de Mainframe</h3>
+                    <h4>Características clave:</h4>
+                    <ul>
+                        <li>Multiusuario: Soporte para cientos de usuarios concurrentes</li>
+                        <li>Multitarea: Ejecución de múltiples procesos simultáneamente</li>
+                        <li>Tolerancia a Fallos: Mecanismos de recuperación automática</li>
+                        <li>Gestión de Recursos: Asignación eficiente de CPU, memoria, E/S</li>
+                    </ul>
+                    
+                    <h4>Ejemplos específicos:</h4>
+                    <ul>
+                        <li>IBM MVS/OS: Para sistemas IBM System/370</li>
+                        <li>IBM VSE: Versión más pequeña para sistemas medianos</li>
+                        <li>Unisys OS 2200: Para mainframes Unisys</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="monitores-teleproceso">
+                    <h3>Monitores de Teleproceso (TP Monitors)</h3>
+                    <h4>Funciones principales:</h4>
+                    <p>CICS (Customer Information Control System) - El estándar de IBM:</p>
+                    <ul>
+                        <li>Gestión de transacciones en línea</li>
+                        <li>Control de concurrencia y bloqueos</li>
+                        <li>Manejo de seguridad y auditoría</li>
+                        <li>Administración de recursos de aplicación</li>
+                        <li>Recuperación ante fallos</li>
+                    </ul>
+                    
+                    <h4>Características avanzadas de CICS:</h4>
+                    <ul>
+                        <li>Programación Transaccional: Unidad lógica de trabajo (LUW)</li>
+                        <li>Gestión de Estados: Mantenimiento de contexto de usuario</li>
+                        <li>Comunicación entre Programas: Paso de mensajes y datos</li>
+                        <li>Interfaces de Usuario: Soporte para diferentes tipos de terminal</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="bases-datos">
+                    <h3>Sistemas de Bases de Datos</h3>
+                    <h4>Características:</h4>
+                    <ul>
+                        <li>Transaccionales ACID (Atomicidad, Consistencia, Aislamiento, Durabilidad)</li>
+                        <li>Altas prestaciones para múltiples usuarios</li>
+                        <li>Mecanismos de bloqueo y concurrencia</li>
+                        <li>Respaldo y recuperación en línea</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="arquitectura-comunicaciones">
+                <h2>ARQUITECTURA DE COMUNICACIONES</h2>
+                
+                <div class="subsection" id="topologias-red">
+                    <h3>Topologías de Red Detalladas</h3>
+                    
+                    <h4>Topología en Estrella</h4>
+                    <p>Ventajas:</p>
+                    <ul>
+                        <li>Fácil administración y diagnóstico</li>
+                        <li>Centralización del control</li>
+                        <li>Aislamiento de fallos (un problema no afecta a otros nodos)</li>
+                    </ul>
+                    <p>Desventajas:</p>
+                    <ul>
+                        <li>Punto único de fallo (el centro)</li>
+                        <li>Alto costo de cableado</li>
+                        <li>Limitaciones de escalabilidad</li>
+                    </ul>
+                    
+                    <h4>Topología Punto a Punto</h4>
+                    <p>Aplicaciones:</p>
+                    <ul>
+                        <li>Conexiones entre centros de datos</li>
+                        <li>Enlaces de respaldo</li>
+                        <li>Comunicación mainframe-mainframe</li>
+                    </ul>
+                    
+                    <h4>Topología Multipunto (Bus)</h4>
+                    <p>Implementación:</p>
+                    <ul>
+                        <li>Múltiples terminales compartiendo un canal común</li>
+                        <li>Protocolos de sondeo (polling) para acceso al medio</li>
+                        <li>Eficiente en costos para áreas geográficas extensas</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="medios-transmision">
+                    <h3>Medios de Transmisión</h3>
+                    
+                    <h4>Líneas Conmutadas (Dial-up)</h4>
+                    <ul>
+                        <li>Uso de red telefónica conmutada (RTC)</li>
+                        <li>Establecimiento de llamada por marcado</li>
+                        <li>Baja velocidad (300-9600 bps inicialmente)</li>
+                        <li>Costo variable según uso</li>
+                    </ul>
+                    
+                    <h4>Líneas Dedicadas</h4>
+                    <ul>
+                        <li>Conexión permanente punto a punto</li>
+                        <li>Mayor velocidad y calidad</li>
+                        <li>Costo fijo independiente del uso</li>
+                        <li>Tipos: 2 hilos, 4 hilos, digitales (T1/E1)</li>
+                    </ul>
+                    
+                    <h4>Redes Públicas de Datos</h4>
+                    <ul>
+                        <li>X.25 (estándar temprano para redes de datos)</li>
+                        <li>Frame Relay (evolución de X.25)</li>
+                        <li>Redes digitales RDSI</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="page">
+            <div class="section" id="protocolos-comunicacion">
+                <h2>PROTOCOLOS DE COMUNICACIÓN ESPECÍFICOS</h2>
+                
+                <div class="subsection" id="protocolos-caracter">
+                    <h3>Protocolos Orientados a Carácter</h3>
+                    <h4>BSC (Binary Synchronous Communications)</h4>
+                    <p>Características:</p>
+                    <ul>
+                        <li>Comunicación half-duplex</li>
+                        <li>Control de enlace por caracteres de control</li>
+                        <li>Detección de errores por BCC (Block Check Character)</li>
+                        <li>Formato de trama: SOH, HEADER, STX, DATA, ETX, BCC</li>
+                    </ul>
+                    <p>Limitaciones:</p>
+                    <ul>
+                        <li>No soporta transmisión full-duplex</li>
+                        <li>Eficiencia reducida en enlaces satelitales</li>
+                        <li>Complejidad en el control de errores</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="protocolos-bit">
+                    <h3>Protocolos Orientados a Bit</h3>
+                    <h4>SDLC (Synchronous Data Link Control)</h4>
+                    <p>Desarrollado por IBM para SNA:</p>
+                    <ul>
+                        <li>Comunicación full-duplex</li>
+                        <li>Operación en modo normal y respuesta</li>
+                        <li>Tipos de estaciones: Primaria, Secundaria, Combinada</li>
+                        <li>Estructura de trama: Bandera, Dirección, Control, Datos, FCS, Bandera</li>
+                    </ul>
+                    
+                    <h4>HDLC (High-level Data Link Control)</h4>
+                    <p>Estandarización ISO:</p>
+                    <ul>
+                        <li>Basado en SDLC de IBM</li>
+                        <li>Múltiples modos de operación</li>
+                        <li>Soporte para configuración balanceada y no balanceada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="modelo-osi">
+                <h2>MODELO OSI APLICADO A TELEPROCESOS - CAPA POR CAPA</h2>
+                
+                <div class="subsection" id="capa-fisica">
+                    <h3>Capa 1 - Capa Física</h3>
+                    <p>Funciones Detalladas:</p>
+                    <ul>
+                        <li>Especificación mecánica de conectores (RS-232, V.35)</li>
+                        <li>Definición eléctrica de señales (niveles de voltaje, impedancia)</li>
+                        <li>Características funcionales (pines de control, timing)</li>
+                        <li>Especificación de medios (cable coaxial, par trenzado, fibra)</li>
+                    </ul>
+                    <p>Ejemplos en Teleprocesos:</p>
+                    <ul>
+                        <li>Interface RS-232: Para conexiones seriales a 19.2 Kbps</li>
+                        <li>Módems V.22/V.32: Para comunicación telefónica</li>
+                        <li>Tarjetas de Comunicación: En mainframes y FEPs</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="capa-enlace">
+                    <h3>Capa 2 - Capa de Enlace de Datos</h3>
+                    <p>Subcapas:</p>
+                    <ul>
+                        <li>LLC (Logical Link Control): Control de flujo, secuenciamiento</li>
+                        <li>MAC (Media Access Control): Acceso al medio físico</li>
+                    </ul>
+                    <p>Protocolos Específicos:</p>
+                    <ul>
+                        <li>SDLC/HDLC para líneas síncronas</li>
+                        <li>BSC para comunicación bisíncrona</li>
+                        <li>LLC Tipo 1, 2, 3 para diferentes calidades de servicio</li>
+                    </ul>
+                    <p>Funciones en Teleproceso:</p>
+                    <ul>
+                        <li>Delimitación de tramas y transparencia de datos</li>
+                        <li>Control de errores por CRC-16 o CRC-32</li>
+                        <li>Control de flujo entre FEP y terminales</li>
+                        <li>Secuenciamiento de tramas para integridad</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="capa-red">
+                    <h3>Capa 3 - Capa de Red</h3>
+                    <p>Funciones Extendidas:</p>
+                    <ul>
+                        <li>Direccionamiento Lógico: Identificación única de dispositivos</li>
+                        <li>Encaminamiento: Determinación de la mejor ruta</li>
+                        <li>Fragmentación y Ensamblado: Adaptación a diferentes MTUs</li>
+                        <li>Control de Congestión: Prevención de saturación de red</li>
+                    </ul>
+                    <p>En Teleprocesos:</p>
+                    <ul>
+                        <li>Protocolos de red en arquitecturas SNA, DECnet</li>
+                        <li>Ruteo entre múltiples FEPs y controladores</li>
+                        <li>Conmutación de paquetes en redes X.25</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="capa-transporte">
+                    <h3>Capa 4 - Capa de Transporte</h3>
+                    <p>Servicios Ofrecidos:</p>
+                    <ul>
+                        <li>Multiplexación: Múltiples sesiones sobre una conexión de red</li>
+                        <li>Segmentación: División de mensajes grandes en segmentos</li>
+                        <li>Control de Flujo Extremo a Extremo</li>
+                        <li>Recuperación de Errores a nivel de transporte</li>
+                    </ul>
+                    <p>En Sistemas de Teleproceso:</p>
+                    <ul>
+                        <li>Garantía de entrega de transacciones completas</li>
+                        <li>Control de flujo entre aplicaciones cliente y servidor</li>
+                        <li>Mecanismos de retransmisión y timeout</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="subsection" id="capa-sesion">
+                <h3>Capa 5 - Capa de Sesión</h3>
+                <p>Servicios Detallados:</p>
+                <ul>
+                    <li>Control de Diálogo: Semi-dúplex, dúplex completo</li>
+                    <li>Sincronización: Puntos de verificación para recuperación</li>
+                    <li>Gestion de Tokens: Control de turnos en comunicación</li>
+                    <li>Gestion de Excepciones: Notificación de condiciones anormales</li>
+                </ul>
+                <p>En Teleprocesos:</p>
+                <ul>
+                    <li>Establecimiento de sesión entre terminal y aplicación</li>
+                    <li>Control de quién transmite en cada momento</li>
+                    <li>Mecanismos de recuperación de sesión ante fallos</li>
+                </ul>
+            </div>
+            
+            <div class="subsection" id="capa-presentacion">
+                <h3>Capa 6 - Capa de Presentación</h3>
+                <p>Funciones Específicas:</p>
+                <ul>
+                    <li>Traducción de Codificación: ASCII ↔ EBCDIC</li>
+                    <li>Compresión de Datos: Para optimizar ancho de banda</li>
+                    <li>Cifrado: Protección de información sensible</li>
+                    <li>Formateo de Datos: Estructuras de datos complejas</li>
+                </ul>
+                <p>Ejemplos Prácticos:</p>
+                <ul>
+                    <li>Conversión automática entre formatos de mainframe y PC</li>
+                    <li>Compresión de pantallas para reducir tiempo de respuesta</li>
+                    <li>Cifrado de datos financieros en transacciones</li>
+                </ul>
+            </div>
+            
+            <div class="subsection" id="capa-aplicacion">
+                <h3>Capa 7 - Capa de Aplicación</h3>
+                <p>Elementos en Teleprocesos:</p>
+                <ul>
+                    <li>Servicios de Aplicación:
+                        <ul>
+                            <li>FTAM (File Transfer Access and Management): Transferencia de archivos</li>
+                            <li>VT (Virtual Terminal): Emulación de terminales</li>
+                            <li>MHS (Message Handling System): Correo electrónico</li>
+                            <li>DS (Directory Services): Directorio de recursos</li>
+                        </ul>
+                    </li>
+                    <li>Aplicaciones Empresariales:
+                        <ul>
+                            <li>Sistemas transaccionales (CICS, IMS/TM)</li>
+                            <li>Sistemas de reservas (SABRE, Amadeus)</li>
+                            <li>Aplicaciones bancarias (cajeros automáticos, banca en línea)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section" id="flujo-transaccion">
+                <h2>FLUJO COMPLETO DE UNA TRANSACCIÓN</h2>
+                <h3>Ejemplo Detallado: Consulta de Saldo Bancario</h3>
+                
+                <div class="subsection" id="inicio-sesion">
+                    <h4>Fase 1: Inicio de Sesión</h4>
+                    <ul>
+                        <li>Usuario conecta terminal y establece comunicación física</li>
+                        <li>Terminal negocia parámetros de comunicación con FEP</li>
+                        <li>Sistema autentica usuario y establece sesión segura</li>
+                        <li>Aplicación presenta pantalla inicial de menú</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="captura-transaccion">
+                    <h4>Fase 2: Captura de Transacción</h4>
+                    <ul>
+                        <li>Usuario selecciona "Consulta de Saldo" e ingresa datos</li>
+                        <li>Terminal valida formato localmente (si es inteligente)</li>
+                        <li>Datos se formatean según protocolo de aplicación</li>
+                        <li>Se añaden encabezados de capas 6 y 7 (presentación y aplicación)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="transmision-mainframe">
+                    <h4>Fase 3: Transmisión hacia el Mainframe</h4>
+                    <ul>
+                        <li>Capa 5 (Sesión): Establece contexto de transacción</li>
+                        <li>Capa 4 (Transporte): Segmenta datos si es necesario</li>
+                        <li>Capa 3 (Red): Añade direccionamiento lógico</li>
+                        <li>Capa 2 (Enlace): Crea trama con control de errores</li>
+                        <li>Capa 1 (Física): Transmite bits por el medio físico</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="procesamiento-mainframe">
+                    <h4>Fase 4: Procesamiento en Mainframe</h4>
+                    <ul>
+                        <li>FEP recibe y verifica tramas (capas 1-2)</li>
+                        <li>Sistema operativo procesa capas 3-4</li>
+                        <li>CICS maneja sesión (capa 5) y presentación (capa 6)</li>
+                        <li>Aplicación bancaria procesa transacción (capa 7)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="respuesta-usuario">
+                    <h4>Fase 5: Respuesta al Usuario</h4>
+                    <ul>
+                        <li>Mainframe genera respuesta con saldo actual</li>
+                        <li>Proceso inverso de encapsulación por las 7 capas</li>
+                        <li>Terminal recibe y presenta información al usuario</li>
+                        <li>Sesión permanece activa para próximas transacciones</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="evolucion-legado">
+                <h2>EVOLUCIÓN Y LEGADO</h2>
+                
+                <div class="subsection" id="transicion-arquitecturas">
+                    <h3>Transición hacia Arquitecturas Modernas</h3>
+                    <p>De Teleprocesos a Cliente-Servidor:</p>
+                    <ul>
+                        <li>Terminales tontas → PCs inteligentes</li>
+                        <li>Mainframes centralizados → Servidores distribuidos</li>
+                        <li>Protocolos propietarios → Estándares abiertos (TCP/IP)</li>
+                        <li>Aplicaciones monolíticas → Servicios web</li>
+                    </ul>
+                    
+                    <h4>Influencia en Tecnologías Actuales:</h4>
+                    <ul>
+                        <li>Cloud Computing: Evolución de la centralización</li>
+                        <li>Microservicios: Versión moderna de transacciones CICS</li>
+                        <li>APIs REST: Sucesor de interfaces de aplicación</li>
+                        <li>Contenedores: Aislamiento similar a regiones CICS</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection" id="lecciones-aprendidas">
+                    <h3>Lecciones Aprendidas y Vigentes</h3>
+                    <p>Principios que Siguen Aplicándose:</p>
+                    <ul>
+                        <li>Separación entre presentación, lógica y datos</li>
+                        <li>Importancia de la consistencia transaccional</li>
+                        <li>Necesidad de mecanismos de recuperación</li>
+                        <li>Valor de la estandarización en comunicaciones</li>
+                    </ul>
+                    
+                    <p>Esta explicación extendida muestra cómo los teleprocesos y el Modelo OSI formaron la base tecnológica sobre la que se construyeron los sistemas distribuidos modernos, estableciendo principios de diseño que siguen siendo relevantes en la arquitectura de sistemas actuales.</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                PeñaHub
+            </div>
+        </div>
+    </div>
+</body>
+</html>
